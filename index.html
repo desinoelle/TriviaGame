@@ -1,0 +1,45 @@
+<!--A Game Of Trivia-->
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <meta charset="UTF-8">
+        <title>Stranger Things Trivia</title>
+
+        <!-- Added link to the jQuery Library -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+        <!--Link styles-->
+        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="assets/css/reset.css">
+        
+        <!--Google Fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+    </head>
+
+    <body>
+
+        <!--All content is in a div centered on the page-->
+        <div class="game">
+
+            <!--Header-->
+            <h1 class="header">Stranger Things Trivia</h1>
+            
+            <!--This is where the trivia questions will go-->
+            <div id="trivia">
+                <div id="time-remaining">Time Remaining: </div>
+                <div id="question">Question</div>
+                <div class="answers">
+                    <div class="answer" id="answer1">1</div>
+                    <div class="answer" id="answer2">2</div>
+                    <div class="answer" id="answer3">3</div>
+                    <div class="answer" id="answer4">4</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!--Javascript-->
+        <script type="text/javascript" src="assets/javascript/app.js"></script>
+
+    </body>
+</html>
