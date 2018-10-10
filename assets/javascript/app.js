@@ -122,8 +122,9 @@ askQuestion();
 $("#time-remaining").text("Time Remaining: " + number);
 run();
 
-//Displays the current question and answer choices
+
 function askQuestion () {
+    //Display the current question and answer choices
     for (var i = 0; i < 10; i++) {
         if (questionNum === i) {
             $("#question").text(theQuestions["question" + (questionNum+1)].question);
@@ -136,14 +137,37 @@ function askQuestion () {
 
     //If all questions have been answered, display the final score
     if (questionNum === 10) {
-        stop();
-        $("#time-remaining").text("");
-        $("#question").text("You finished the quiz!");
-        $("#a").text("Score: " + score + " points");
-        $("#b").text("Refresh the page to play again!");
+        finalScore();
+    }
+}
+
+function finalScore() {
+    stop();
+        $("#time-remaining").text("You finished the quiz!");
+        $("#question").text("Score: " + score + " points");
+        $("#a").text("");
+        $("#b").text("");
         $("#c").text("");
         $("#d").text("");
-    }
+
+        //Add this button to restart the game
+        var restartButton = $("<button>");
+        restartButton.text("Restart Game");
+        restartButton.click( function() {
+            //Reset variables
+            score = 0;
+            questionNum = 0;
+            answered = false;
+            number = 10;
+
+            //Display first question
+            askQuestion();
+
+            //Starting timer text content and start the timer
+            $("#time-remaining").text("Time Remaining: " + number);
+            run();
+        });
+        $("#question").append(restartButton);
 }
 
 //Check answer clicked
@@ -156,14 +180,22 @@ function answerClick(userAnswer) {
     if (userAnswer === theQuestions["question" + (questionNum+1)].correctAnswer) {
         $("#time-remaining").text("Correct! Next question...")
         score++;
+
+        //Display next question after this one is answered
+        questionNum++;
+        askQuestion();
+        number = 11;
+        run();
     }
     else {
         $("#time-remaining").text("Wrong answer! The correct answer was " + "'" + theQuestions["question" + (questionNum+1)].correctAnswer + "'.");
-    }
 
-    //Display next question after this one is answered
-    questionNum++;
-    askQuestion();
+        //Display next question after this one is answered
+        questionNum++;
+        askQuestion();
+        number = 11;
+        run();
+    }
 }
 
 //Timer running
@@ -174,9 +206,9 @@ function run() {
 //Count down the time
 function decrement() {
     number--;
-
     $("#time-remaining").text("Time Remaining: " + number);
 
+    //This displays if the question isn't answered in time
     if (number === 0 && answered === false) {
         stop();
 
